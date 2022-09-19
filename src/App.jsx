@@ -46,7 +46,8 @@ class App extends Component {
         style = {{
           display: "flex",
           flexDirection: "column",
-          height: '100vh',
+            height: '1200px',
+          
           justifyContent: 'center',
           alignItems: 'center',
           fontSize: 40,

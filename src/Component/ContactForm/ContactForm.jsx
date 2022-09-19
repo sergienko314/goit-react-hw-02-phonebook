@@ -16,7 +16,7 @@ class ContactForm extends Component {
     submitHandler = e => {
         e.preventDefault();
         const { name, number } = this.state;
-        if (name !== "" || number !== "") {
+        if (name.length > 3 || number.length > 3) {
             const contacts = {
                 id: uuidv4(),
                 name: name,
