@@ -26,7 +26,7 @@ class App extends Component {
     return this.setState({ filter: input.trim() })
   }
 
-  changeContactsFilter = () => {
+  getFilteredContacts = () => {
     if (this.state.filter === "") {
       return this.state.contacts
     }
@@ -55,11 +55,11 @@ class App extends Component {
       }}
     >
       <h1>Phonebook </h1>
-        <ContactForm contacts={this.state.contacts}
+          <ContactForm
           addContact={ this.addContact} />
         <h2>Contacts</h2>
         <Filter filterInput={this.filterInput} />
-        <ContactList contacts={this.changeContactsFilter}
+        <ContactList contacts={this.getFilteredContacts()}
           deleteContact={this.deleteContact} />
     </div >
   );
