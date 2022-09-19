@@ -1,8 +1,9 @@
 
-import ContactForm from "ContactForm";
-import ContactList from "ContactList";
-import Filter from "Filter";
+import ContactForm from "Component/ContactForm";
+import ContactList from "Component/ContactList";
+import Filter from "Component/Filter";
 import { Component } from "react";
+import propTypes from 'prop-types'
 
 class App extends Component {
   state = {
@@ -15,15 +16,14 @@ class App extends Component {
     filter: "",
   }
 
-  addContact = (res) => {
+  addContact = (contactsArr) => {
     return this.setState((prev) => ({
-      contacts: [...prev.contacts, res]
+      contacts: [...prev.contacts, contactsArr]
     }))
   }
 
   filterInput = (e) => {
     const input = e.target.value
-    console.log(input);
     return this.setState({ filter: input.trim() })
   }
 
@@ -68,3 +68,4 @@ class App extends Component {
   
 };
 export default App;
+App.propTypes 
