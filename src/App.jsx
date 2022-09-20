@@ -14,7 +14,19 @@ class App extends Component {
     ],
     filter: "",
   }
-
+  componentDidUpdate(prevProps, prevState,) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+    }
+  }
+  componentDidMount() { 
+    const contactLS = JSON.parse(localStorage.getItem('contacts'))
+    if (contactLS) {
+      this.setState({ contacts: [...contactLS] })
+    }
+     
+  }
+  
   addContact = (contactsArr) => {
     return this.setState((prev) => ({
       contacts: [...prev.contacts, contactsArr]
@@ -57,7 +69,8 @@ class App extends Component {
     >
       <h1>Phonebook </h1>
           <ContactForm
-          addContact={ this.addContact} />
+            checkContacts={this.state.contacts}
+          addContact={ this.addContact}/>
         <h2>Contacts</h2>
         <Filter filterInput={this.filterInput} />
         <ContactList contacts={this.getFilteredContacts()}

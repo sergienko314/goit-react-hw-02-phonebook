@@ -6,6 +6,18 @@ class ContactForm extends Component {
         name: "",
         number: "",
     }
+    
+    componentDidUpdate(prevProps, prevState,) {
+        if (prevState !== this.state) {
+           localStorage.setItem('contact', JSON.stringify(this.state))
+       }
+    }
+    componentDidMount() { 
+      const contactLS = JSON.parse(localStorage.getItem('contact'))
+    if (contactLS) {
+      this.setState({ name: contactLS.name, number: contactLS.number })
+    }
+    }
 
     changeHandler = (e) => {
         const { name, value } = e.target;
@@ -16,7 +28,9 @@ class ContactForm extends Component {
     submitHandler = e => {
         e.preventDefault();
         const { name, number } = this.state;
-        if (name.length > 3 || number.length > 3) {
+        const {checkContacts} = this.props
+        if (name.length > 1 && number.length > 1) {
+            if (checkContacts.some((contact)=> contact.name === name)) { return alert("this contact olredy har")}
             const contacts = {
                 id: uuidv4(),
                 name: name,
